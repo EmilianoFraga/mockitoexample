@@ -1,0 +1,13 @@
+*.bak
+*.swp
+*~
+.attach_pid*
+
+.settings
+.project
+.classpath
+.idea
+*.iml
+*.code-workspace
+.vscode
+target/
