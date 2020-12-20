@@ -19,13 +19,16 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class SubjectATest {
+public class SubjectATest_InjectSubclassedVeryHeavy {
 
 	private SubjectA subjectA;
+	private IVeryHeavy mockedVeryHeavy;
 
 	@Before
 	public void setUp() {
-		subjectA = new SubjectA(new VeryHeavy());
+		mockedVeryHeavy = new MockedVeryHeavy();
+
+		subjectA = new SubjectA(mockedVeryHeavy);
 	}
 
 	@Test
@@ -33,5 +36,13 @@ public class SubjectATest {
 		// After running this test you will see that there is a veryheavy call in the log output
 		String result = subjectA.doStuffA("banana");
 		assertEquals("VERY HEAVY::STUFF-A::banana", result);
+	}
+
+	// This subclass of VeryHeavy can override the methods we don't want to call
+	private static class MockedVeryHeavy extends VeryHeavy {
+		@Override
+		public String veryHeavyMethod(String input) {
+			return String.join(VeryHeavy.DELIMITER, "VERY HEAVY", input);
+		}
 	}
 }

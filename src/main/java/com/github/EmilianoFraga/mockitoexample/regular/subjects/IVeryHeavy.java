@@ -14,15 +14,6 @@
 
 package com.github.EmilianoFraga.mockitoexample.regular.subjects;
 
-import java.util.logging.Logger;
-
-public class VeryHeavy implements IVeryHeavy {
-
-	public static final String DELIMITER = "::";
-	private static Logger logger = Logger.getLogger(VeryHeavy.class.getName());
-
-	public String veryHeavyMethod(String input) {
-		logger.info("I am doing very heavy, in production, stuff here");
-		return String.join(DELIMITER, "VERY HEAVY", input);
-	}
+public interface IVeryHeavy {
+	String veryHeavyMethod(String input);
 }

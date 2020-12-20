@@ -15,12 +15,19 @@
 package com.github.EmilianoFraga.mockitoexample.regular.subjects;
 
 /*
-This is the regular situation.
-Because of the INHERITANCE approach, the veryHeavyMethod will be called anyway
+This solution means favoring composition over inheritance.
+Actually the original design should do that, composition, however if this wasn't the case, then it might be possible to fix by refactoring.
+This might be quite complex sometimes... So evaluate if the solution fits your case.
  */
-public class SubjectA extends VeryHeavy {
+public class SubjectA {
+	private final IVeryHeavy veryheavy;
+
+	public SubjectA(IVeryHeavy veryheavy) {
+		this.veryheavy = veryheavy;
+	}
+
 	public String doStuffA(String input) {
-		final String myStuff = String.join(DELIMITER, "STUFF-A", input);
-		return veryHeavyMethod(myStuff);
+		final String myStuff = String.join(VeryHeavy.DELIMITER, "STUFF-A", input);
+		return veryheavy.veryHeavyMethod(myStuff);
 	}
 }
